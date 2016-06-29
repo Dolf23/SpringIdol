@@ -23,8 +23,8 @@ public class Sonnet29 implements Poem {
     }
 
     public void recite() {
-        for (int i = 0; i < sonnet.length; i++) {
-            System.out.println(sonnet[i]);
+        for (String aSonnet : sonnet) {
+            System.out.println(aSonnet);
         }
     }
 }
