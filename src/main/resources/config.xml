@@ -2,8 +2,33 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+        default-init-method="turnOnLights"
+        default-destroy-method="turnOffLights">
 
-    <bean id="duke" class="performers.Juggler"/>
+    <bean id="duke" class="performers.Juggler">
+        <constructor-arg value="15"/>
+    </bean>
+    <bean id="sonnet29" class="poems.Sonnet29"/>
+    <bean id="poeticDuke" class="performers.PoeticJuggler">
+        <constructor-arg value="15"/>
+        <constructor-arg ref="sonnet29"/>
+    </bean>
+    <bean id="theStage" class="show.Stage" factory-method="getInstance"/>
+    <bean id="ticket" class="show.Ticket" scope="prototype"/>
+    <bean id="auditorium" class="show.Auditorium"
+          init-method="turnOnLights"
+          destroy-method="turnOffLights"/>
+    <bean id="piano" class="instruments.Piano"/>
+    <bean id="kenny" class="performers.Instrumentalist">
+        <property name="song" value="Jingle Bells"/>
+        <property name="instrument">
+            <bean class="instruments.Saxophone"/>
+        </property>
+    </bean>
+    <bean id="kenny2" class="performers.Instrumentalist">
+        <property name="song" value="Jingle Bells"/>
+        <property name="instrument" ref="piano"/>
+    </bean>
 
 </beans>
